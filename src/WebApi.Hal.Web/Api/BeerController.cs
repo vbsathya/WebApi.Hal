@@ -6,6 +6,7 @@ using Microsoft.Data.Entity;
 
 namespace WebApi.Hal.Web.Api
 {
+    [Route(Constants.EndPoints.Beer)]
     public class BeerController : Controller
     {
         readonly BeerDbContext beerDbContext;
@@ -15,6 +16,7 @@ namespace WebApi.Hal.Web.Api
             this.beerDbContext = beerDbContext;
         }
 
+        [HttpGet]
         // GET beers/5
         public BeerRepresentation Get(int id)
         {
@@ -35,11 +37,13 @@ namespace WebApi.Hal.Web.Api
             };
         }
 
+        [HttpPut]
         // PUT beers/5
         public void Put(int id, string value)
         {
         }
 
+        [HttpDelete]
         // DELETE beers/5
         public void Delete(int id)
         {

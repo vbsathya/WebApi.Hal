@@ -6,6 +6,7 @@ using WebApi.Hal.Web.Data.Queries;
 
 namespace WebApi.Hal.Web.Api
 {
+    [Route(Constants.EndPoints.BeersFromBrewery)]
     public class BeersFromBreweryController : Controller
     {
         readonly IRepository repository;
@@ -15,6 +16,7 @@ namespace WebApi.Hal.Web.Api
             this.repository = repository;
         }
 
+        [HttpGet]
         public BeerListRepresentation Get(int id, int page = 1)
         {
             var beers = repository.Find(new GetBeersQuery(b => b.Brewery.Id == id), page, BeersController.PageSize);

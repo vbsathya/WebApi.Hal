@@ -5,6 +5,7 @@ using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web.Api
 {
+    [Route(Constants.EndPoints.Breweries)]
     public class BreweriesController : Controller
     {
         readonly BeerDbContext beerDbContext;
@@ -14,6 +15,7 @@ namespace WebApi.Hal.Web.Api
             this.beerDbContext = beerDbContext;
         }
 
+        [HttpGet]
         public BreweryListRepresentation Get()
         {
             var breweries = beerDbContext.Styles
@@ -28,6 +30,8 @@ namespace WebApi.Hal.Web.Api
             return new BreweryListRepresentation(breweries);
         }
 
+        /*
+        [HttpGet]
         public BreweryRepresentation Get(int id)
         {
             var brewery = beerDbContext.Breweries.FirstOrDefault(b => b.Id == id);
@@ -37,5 +41,6 @@ namespace WebApi.Hal.Web.Api
                 Name = brewery.Name
             };
         }
+        */
     }
 }

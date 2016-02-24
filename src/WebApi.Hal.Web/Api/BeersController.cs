@@ -7,6 +7,7 @@ using WebApi.Hal.Web.Models;
 
 namespace WebApi.Hal.Web.Api
 {
+    [Route(Constants.EndPoints.Beers)]
     public class BeersController : Controller
     {
         public const int PageSize = 5;
@@ -19,6 +20,7 @@ namespace WebApi.Hal.Web.Api
         }
 
         // GET beers
+        [HttpGet]
         public BeerListRepresentation Get(int page = 1)
         {
             var beers = repository.Find(new GetBeersQuery(), page, PageSize);
@@ -28,6 +30,7 @@ namespace WebApi.Hal.Web.Api
             return resourceList;
         }
 
+        /*
         [HttpGet]
         public BeerListRepresentation Search(string searchTerm, int page = 1)
         {
@@ -47,7 +50,9 @@ namespace WebApi.Hal.Web.Api
 
             return beersResource;
         }
+        */
 
+        [HttpPost]
         // POST beers
         public ActionResult Post(BeerRepresentation value)
         {

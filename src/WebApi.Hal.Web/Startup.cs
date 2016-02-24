@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.SwaggerGen;
 using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web
@@ -33,6 +34,15 @@ namespace WebApi.Hal.Web
         {
             var connectionString = Configuration["Data:DefaultConnection:ConnectionString"];
             services.AddLogging();
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerDocument(opts => {
+                opts.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "Beers",
+                    TermsOfService = "None"
+                });
+            });
             services.AddMvc();
             services.AddEntityFramework()
                 .AddSqlServer()
@@ -45,32 +55,13 @@ namespace WebApi.Hal.Web
             ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
+            app.UseSwaggerGen();
+            app.UseSwaggerUi();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    "BeersRoute",
-                    "beers/{id}",
-                    new
-                    {
-                        controller = "Beer"
-                    });
-                routes.MapRoute(
-                    "DefaultApi",
-                    "{controller}/{id?}");
-                routes.MapRoute(
-                    "BreweryBeersRoute",
-                    "breweries/{id}/beers",
-                    new
-                    {
-                        controller = "BeersFromBrewery"
-                    });
-                routes.MapRoute(
-                    "StyleBeersRoute",
-                    "styles/{id}/beers",
-                    new
-                    {
-                        controller = "BeersFromStyle"
-                    });
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
 

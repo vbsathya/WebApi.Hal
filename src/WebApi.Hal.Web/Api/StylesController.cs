@@ -6,6 +6,7 @@ using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web.Api
 {
+    [Route(Constants.EndPoints.Styles)]
     public class StylesController : Controller
     {
         readonly BeerDbContext beerDbContext;
@@ -15,6 +16,7 @@ namespace WebApi.Hal.Web.Api
             this.beerDbContext = beerDbContext;
         }
 
+        [HttpGet]
         public BeerStyleListRepresentation Get()
         {
             var beerStyles = beerDbContext.Styles
@@ -29,6 +31,8 @@ namespace WebApi.Hal.Web.Api
             return new BeerStyleListRepresentation(beerStyles);
         }
 
+        /*
+        [HttpGet]
         public ActionResult Get(int id)
         {
             var beerStyle = beerDbContext.Styles.SingleOrDefault(s => s.Id == id);
@@ -43,5 +47,6 @@ namespace WebApi.Hal.Web.Api
 
             return new HttpOkObjectResult(beerStyleResource);
         }
+        */
     }
 }

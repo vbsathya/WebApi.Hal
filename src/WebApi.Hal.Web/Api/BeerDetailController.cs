@@ -7,6 +7,7 @@ using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web.Api
 {
+    [Route(Constants.EndPoints.BeerDetail)]
     public class BeerDetailController : Controller
     {
         readonly BeerDbContext beerDbContext;
@@ -17,6 +18,7 @@ namespace WebApi.Hal.Web.Api
         }
 
         // GET beerdetail/5
+        [HttpGet]
         public BeerDetailRepresentation Get(int id)
         {
             var beer = beerDbContext.Beers
@@ -52,6 +54,7 @@ namespace WebApi.Hal.Web.Api
         }
 
         // PUT beerdetail/5
+        [HttpPut]
         public void Put(int id, BeerDetailRepresentation beer)
         {
             // this is here just to see how the deserializer is working
