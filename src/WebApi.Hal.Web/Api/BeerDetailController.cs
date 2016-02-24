@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web.Http;
 using WebApi.Hal.Web.Api.Resources;
 using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web.Api
 {
-    public class BeerDetailController : ApiController
+    public class BeerDetailController : Controller
     {
-        readonly IBeerDbContext beerDbContext;
+        readonly BeerDbContext beerDbContext;
 
-        public BeerDetailController(IBeerDbContext beerDbContext)
+        public BeerDetailController(BeerDbContext beerDbContext)
         {
             this.beerDbContext = beerDbContext;
         }
@@ -18,7 +19,10 @@ namespace WebApi.Hal.Web.Api
         // GET beerdetail/5
         public BeerDetailRepresentation Get(int id)
         {
-            var beer = beerDbContext.Beers.Include("Brewery").Include("Style").Single(br => br.Id == id); // lazy loading isn't on for this query; force loading
+            var beer = beerDbContext.Beers
+                .Include(b => b.Brewery)
+                .Include(b => b.Style)
+                .Single(br => br.Id == id); // lazy loading isn't on for this query; force loading
             var reviews = beerDbContext.Reviews
                 .Where(r=>r.Beer_Id == id)
                 .ToList()

@@ -4,7 +4,6 @@ namespace WebApi.Hal.Web.Data
 {
     public interface IRepository
     {
-        TEntity Get<TEntity>(object id) where TEntity : class;
         IEnumerable<TEntity> FindAll<TEntity>() where TEntity : class;
         IEnumerable<TEntity> Find<TEntity>(IQuery<TEntity> query) where TEntity : class;
         PagedResult<TEntity> Find<TEntity>(IPagedQuery<TEntity> query, int pageNumber, int itemsPerPage) where TEntity : class;

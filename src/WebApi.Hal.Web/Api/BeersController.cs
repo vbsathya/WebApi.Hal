@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using Microsoft.AspNet.Mvc;
+using System.Linq;
 using WebApi.Hal.Web.Api.Resources;
 using WebApi.Hal.Web.Data;
 using WebApi.Hal.Web.Data.Queries;
@@ -9,7 +7,7 @@ using WebApi.Hal.Web.Models;
 
 namespace WebApi.Hal.Web.Api
 {
-    public class BeersController : ApiController
+    public class BeersController : Controller
     {
         public const int PageSize = 5;
 
@@ -51,20 +49,11 @@ namespace WebApi.Hal.Web.Api
         }
 
         // POST beers
-        public HttpResponseMessage Post(BeerRepresentation value)
+        public ActionResult Post(BeerRepresentation value)
         {
             var newBeer = new Beer(value.Name);
             repository.Add(newBeer);
-
-            return new HttpResponseMessage(HttpStatusCode.Created)
-            {
-                Headers =
-                {
-                    Location = LinkTemplates.Beers.Beer.CreateUri(new { id = newBeer.Id })
-                }
-            };
-        }
-
-        
+            return new CreatedResult(LinkTemplates.Beers.Beer.CreateUri(new { id = newBeer.Id }), newBeer.Id);
+        }        
     }
 }

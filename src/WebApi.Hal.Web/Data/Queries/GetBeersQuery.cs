@@ -18,7 +18,7 @@ namespace WebApi.Hal.Web.Data.Queries
             this.where = where ?? (b=>true);
         }
 
-        public PagedResult<BeerRepresentation> Execute(IBeerDbContext dbContext, int skip, int take)
+        public PagedResult<BeerRepresentation> Execute(BeerDbContext dbContext, int skip, int take)
         {
             var beers = dbContext
                 .Beers

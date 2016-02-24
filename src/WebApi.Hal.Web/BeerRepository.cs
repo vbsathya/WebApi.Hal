@@ -6,16 +6,11 @@ namespace WebApi.Hal.Web
 {
     public class BeerRepository : IRepository
     {
-        readonly IBeerDbContext beerDbContext;
+        readonly BeerDbContext beerDbContext;
 
-        public BeerRepository(IBeerDbContext beerDbContext)
+        public BeerRepository(BeerDbContext beerDbContext)
         {
             this.beerDbContext = beerDbContext;
-        }
-
-        public TEntity Get<TEntity>(object id) where TEntity : class
-        {
-            return beerDbContext.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> FindAll<TEntity>() where TEntity : class

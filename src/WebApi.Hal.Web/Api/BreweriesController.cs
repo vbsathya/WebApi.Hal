@@ -1,15 +1,15 @@
-﻿using System.Linq;
-using System.Web.Http;
+﻿using Microsoft.AspNet.Mvc;
+using System.Linq;
 using WebApi.Hal.Web.Api.Resources;
 using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web.Api
 {
-    public class BreweriesController : ApiController
+    public class BreweriesController : Controller
     {
-        readonly IBeerDbContext beerDbContext;
+        readonly BeerDbContext beerDbContext;
 
-        public BreweriesController(IBeerDbContext beerDbContext)
+        public BreweriesController(BeerDbContext beerDbContext)
         {
             this.beerDbContext = beerDbContext;
         }
@@ -30,8 +30,7 @@ namespace WebApi.Hal.Web.Api
 
         public BreweryRepresentation Get(int id)
         {
-            var brewery = beerDbContext.Breweries.Find(id);
-
+            var brewery = beerDbContext.Breweries.FirstOrDefault(b => b.Id == id);
             return new BreweryRepresentation
             {
                 Id = brewery.Id,

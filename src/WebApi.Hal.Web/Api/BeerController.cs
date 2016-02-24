@@ -1,15 +1,16 @@
-﻿using System.Web.Http;
-using System.Linq;
+﻿using System.Linq;
 using WebApi.Hal.Web.Api.Resources;
 using WebApi.Hal.Web.Data;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 
 namespace WebApi.Hal.Web.Api
 {
-    public class BeerController : ApiController
+    public class BeerController : Controller
     {
-        readonly IBeerDbContext beerDbContext;
+        readonly BeerDbContext beerDbContext;
 
-        public BeerController(IBeerDbContext beerDbContext)
+        public BeerController(BeerDbContext beerDbContext)
         {
             this.beerDbContext = beerDbContext;
         }
@@ -17,7 +18,10 @@ namespace WebApi.Hal.Web.Api
         // GET beers/5
         public BeerRepresentation Get(int id)
         {
-            var beer = beerDbContext.Beers.Include("Brewery").Include("Style").Single(br => br.Id == id); // lazy loading isn't on for this query; force loading
+            var beer = beerDbContext.Beers
+                .Include(b => b.Brewery)
+                .Include(b => b.Style)
+                .Single(br => br.Id == id); // lazy loading isn't on for this query; force loading
 
             return new BeerRepresentation
             {
