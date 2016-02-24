@@ -16,7 +16,7 @@ namespace WebApi.Hal
 {
     public class XmlHalMediaTypeFormatter : OutputFormatter
     {
-        private const string _mediaTypeHeaderValueName = "application/hal+json";
+        private const string _mediaTypeHeaderValueName = "application/hal+xml";
 
         #region Constructor
 

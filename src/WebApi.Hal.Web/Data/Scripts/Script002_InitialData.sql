@@ -1,14 +1,14 @@
-﻿INSERT INTO Breweries ([Name], City, Country, Website)
+﻿INSERT INTO Brewery ([Name])
 VALUES
-	('Little Creatures', 'Fremantle', 'Australia', 'https://littlecreatures.com.au/'),
-	('BrewDog ', 'Fraserburgh', 'Scotland', 'http://www.brewdog.com/'),
-	('Nøgne Ø', 'Grimstad', 'Norway', 'http://www.nogne-o.com/'),
-	('8 Wired Brewing Co.', 'Blenheim', 'New Zealand', 'http://www.8wired.co.nz/'),
-	('Sierra Nevada Brewing Co.', 'Chico', 'USA', 'http://www.sierra-nevada.com/'),
-	('Rogue Ales', 'Newport', 'United States', 'http://www.rogue.com/')
+	('Little Creatures'),
+	('BrewDog '),
+	('Nøgne Ø'),
+	('8 Wired Brewing Co.'),
+	('Sierra Nevada Brewing Co.'),
+	('Rogue Ales')
 GO
 
-INSERT INTO BeerStyles ([Name])
+INSERT INTO BeerStyle ([Name])
 VALUES
 	('American Double / Imperial IPA'),
 	('American Amber / Red Ale'),
@@ -21,20 +21,20 @@ VALUES
 	('Maibock / Helles Bock')
 GO
 
-INSERT INTO Beers ([Name], Style_Id , Brewery_Id, Abv)
+INSERT INTO Beer ([Name],StyleId, BreweryId)
 VALUES
-	('Hopwired IPA', 1, 4, 7.3),
-	('Tall Poppy', 2, 4, 7.0),
-	('Day Of The Long Shadow', 3, 1, 8.9),
-	('Little Creatures Pale Ale', 4, 1, 5.2),
-	('Rogers', 5, 1, 3.80),
-	('Hardcore IPA', 1, 2, 9),
-	('God Jul', 6, 3, 8.5),
-	('Tiger Tripel', 7, 3, 9.0),
-	('Nøgne Ø India Pale Ale', 8, 3, 7.5),
-	('Sierra Nevada Celebration Ale', 8, 5, 6.8),
-	('Sierra Nevada Pale Ale', 4, 5, 5.6),
-	('Red Fox Amber Ale', 2, 6, 5.1),
-	('Dead Guy Ale', 9, 6, 6.5),
-	('5 A.M. Saint', 2, 2, 5.0)
+	('Hopwired IPA', 1, 4),
+	('Tall Poppy', 2, 4),
+	('Day Of The Long Shadow', 3, 1),
+	('Little Creatures Pale Ale', 4, 1),
+	('Rogers', 5, 1),
+	('Hardcore IPA', 1, 2),
+	('God Jul', 6, 3),
+	('Tiger Tripel', 7, 3),
+	('Nøgne Ø India Pale Ale', 8, 3),
+	('Sierra Nevada Celebration Ale', 8, 5),
+	('Sierra Nevada Pale Ale', 4, 5),
+	('Red Fox Amber Ale', 2, 6),
+	('Dead Guy Ale', 9, 6),
+	('5 A.M. Saint', 2, 2)
 GO

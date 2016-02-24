@@ -43,7 +43,11 @@ namespace WebApi.Hal.Web
                     TermsOfService = "None"
                 });
             });
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.OutputFormatters.Add(new XmlHalMediaTypeFormatter());
+                options.OutputFormatters.Add(new JsonHalMediaTypeFormatter());
+            });
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<BeerDbContext>(opt => opt.UseSqlServer(connectionString));
