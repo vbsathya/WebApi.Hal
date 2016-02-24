@@ -14,6 +14,7 @@ namespace WebApi.Hal.Tests
 
         readonly OrganisationListRepresentation oneitemrepresentation;
 
+        /*
         public HalResourceListTests()
         {
             representation = new OrganisationListRepresentation(
@@ -93,6 +94,6 @@ namespace WebApi.Hal.Tests
                 // assert
                 Approvals.Verify(serialisedResult);
             }
-        }
+        }*/
     }
 }

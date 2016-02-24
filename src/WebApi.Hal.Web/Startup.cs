@@ -45,8 +45,8 @@ namespace WebApi.Hal.Web
             });
             services.AddMvc(options =>
             {
-                options.OutputFormatters.Add(new XmlHalMediaTypeFormatter());
-                options.OutputFormatters.Add(new JsonHalMediaTypeFormatter());
+                options.OutputFormatters.Add(new XmlHalMediaTypeOutputFormatter());
+                options.OutputFormatters.Add(new JsonHalMediaTypeOutputFormatter());
             });
             services.AddEntityFramework()
                 .AddSqlServer()

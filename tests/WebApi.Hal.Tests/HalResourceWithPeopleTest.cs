@@ -15,7 +15,7 @@ namespace WebApi.Hal.Tests
         {
             resource = new OrganisationWithPeopleRepresentation(1, "Org Name");
         }
-
+        /*
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         public void organisation_get_json_test()
@@ -56,6 +56,6 @@ namespace WebApi.Hal.Tests
                 // assert
                 Approvals.Verify(serialisedResult);
             }
-        } 
+        } */
     }
 }

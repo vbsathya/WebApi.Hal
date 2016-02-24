@@ -29,7 +29,7 @@ namespace WebApi.Hal.Tests
                 }
             };
         }
-        
+        /*
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         public void ProperlySerializesRepresentationToJson()
@@ -88,6 +88,6 @@ namespace WebApi.Hal.Tests
 				// assert
 				Approvals.Verify(serialisedResult);
 			}
-		}
+		}*/
 	}
 }

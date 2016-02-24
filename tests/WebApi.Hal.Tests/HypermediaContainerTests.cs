@@ -12,7 +12,7 @@ namespace WebApi.Hal.Tests
     public class HypermediaContainerTests
     {
         readonly ProductRepresentation representation = new ProductRepresentation();
-
+        /*
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         public void CanUseRegisterExtensionMethod()
@@ -120,6 +120,6 @@ namespace WebApi.Hal.Tests
             Assert.Equal(2, hypermedia.Count());
             Assert.Contains(link1, hypermedia, Link.EqualityComparer);
             Assert.Contains(link2, hypermedia, Link.EqualityComparer);
-        }
+        }*/
     }
 }

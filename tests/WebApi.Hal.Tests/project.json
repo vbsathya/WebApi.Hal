@@ -1,0 +1,30 @@
+{
+    "version": "1.0.0-*",
+    "description": "",
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+    "tooling": {
+        "defaultNamespace": "WebApi.Hal.Tests"
+    },
+    "dependencies": {
+        "Moq": "4.2.1510.2205",
+        "NUnit": "3.0.1",
+      "xunit": "2.1.0",
+      "ApprovalTests": "3.0.10",
+      "ApprovalUtilities":  "3.0.10",
+        "xunit.runner.dnx": "2.1.0-rc1-build204",
+        "Microsoft.AspNet.TestHost": "1.0.0-rc1-final",
+        "WebApi.Hal": ""
+    },
+    "commands": {
+        "test": "xunit.runner.dnx"
+    },
+    "frameworks": {
+        "dnx451": {
+            "frameworkAssemblies": {
+                "System.Core": "4.0.0.0"
+            }
+        }
+    }
+}
