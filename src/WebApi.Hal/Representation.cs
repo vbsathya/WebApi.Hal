@@ -28,12 +28,12 @@ namespace WebApi.Hal
         {
             // Clear the embeddedResourceProperties in order to make this object re-serializable.
             embeddedResourceProperties.Clear();
-
+#if DNX451
             if (!ResourceConverter.IsResourceConverterContext(context))
                 return;
-            
-            var ctx = (HalJsonConverterContext)context.Context;
+#endif
 
+            var ctx = HalJsonConverterContext.Create();
             if (!ctx.IsRoot) 
                 return;
             
@@ -54,12 +54,15 @@ namespace WebApi.Hal
         [OnSerialized]
         private void OnSerialized(StreamingContext context)
         {
-            if (ResourceConverter.IsResourceConverterContext(context))
+#if DNX451
+            if (!ResourceConverter.IsResourceConverterContext(context))
             {
-                // restore embedded resource properties
-                foreach (var prop in embeddedResourceProperties.Keys)
-                    prop.SetValue(this, embeddedResourceProperties[prop], null);
+                return;
             }
+#endif
+                // restore embedded resource properties
+            foreach (var prop in embeddedResourceProperties.Keys)
+                prop.SetValue(this, embeddedResourceProperties[prop], null);
         }
 
         Link ToLink(IHypermediaResolver resolver)

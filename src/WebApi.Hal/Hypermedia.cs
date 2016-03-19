@@ -12,7 +12,7 @@ namespace WebApi.Hal
         readonly IDictionary<Type, IList<Link>> hypermedia = new Dictionary<Type, IList<Link>>();
         readonly IDictionary<Type, object> appenders = new Dictionary<Type, object>();
 
-        Hypermedia()
+        public Hypermedia()
         {
         }
 

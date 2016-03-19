@@ -11,6 +11,7 @@ namespace WebApi.Hal
         }
 
         public bool IsSourceAnArray { get; set; }
+
         public IList<IResource> Resources { get; private set; }
     }
 }

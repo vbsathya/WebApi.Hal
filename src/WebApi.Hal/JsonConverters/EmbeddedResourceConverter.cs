@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using WebApi.Hal.Interfaces;
+using System.Reflection;
 
 namespace WebApi.Hal.JsonConverters
 {
@@ -46,7 +47,12 @@ namespace WebApi.Hal.JsonConverters
 
         public override bool CanConvert(Type objectType)
         {
+#if DNX451
             return typeof(IList<EmbeddedResource>).IsAssignableFrom(objectType);
+#endif
+#if DNXCORE50
+            return typeof(IList<EmbeddedResource>).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+#endif
         }
     }
 }

@@ -12,13 +12,27 @@ namespace WebApi.Hal
 
         public static bool IsValidBasicType(this PropertyInfo property)
         {
+            bool isValueType = false;
+#if DNX451
+            isValueType = property.PropertyType.IsValueType;
+#endif
+#if DNXCORE50
+            isValueType = property.PropertyType.GetTypeInfo().IsValueType;
+#endif
             return !NonSerializedProperties.Contains(property.Name) && property.PropertyType.Namespace == "System"
-                   && (property.PropertyType.IsValueType || property.PropertyType == typeof(string));
+                   && (isValueType || property.PropertyType == typeof(string));
         }
 
         public static bool IsGenericListOfApiResource(this Type type)
         {
-            if (type.IsGenericType && typeof(IList).IsAssignableFrom(type))
+            bool isGenericType = false;
+#if DNX451
+            isGenericType = type.IsGenericType;
+#endif
+#if DNXCORE50
+            isGenericType = type.GetTypeInfo().IsGenericType;
+#endif
+            if (isGenericType && typeof(IList).IsAssignableFrom(type))
             {
                 var genericType = type.GetGenericArguments().Single();
                 return typeof(Representation).IsAssignableFrom(genericType);
@@ -29,7 +43,9 @@ namespace WebApi.Hal
 
         public static PropertyInfo[] GetPublicInstanceProperties(this Type type)
         {
-            return type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetField | BindingFlags.SetField);
+            return type.GetProperties(BindingFlags.Public | 
+                BindingFlags.Instance | 
+                BindingFlags.NonPublic);
         }
 
         public static void SetPropertyValueFromString(this Type type, string propertyName, string value, object instance)

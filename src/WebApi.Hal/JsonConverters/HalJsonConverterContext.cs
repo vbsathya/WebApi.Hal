@@ -25,5 +25,10 @@ namespace WebApi.Hal.JsonConverters
         }
 
         public bool IsRoot { get; set; }
+
+        public static HalJsonConverterContext Create()
+        {
+            return new HalJsonConverterContext(new Hypermedia());
+        }
     }
 }
