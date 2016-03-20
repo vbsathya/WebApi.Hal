@@ -25,6 +25,7 @@
     },
     "dnxcore50": {
       "dependencies": {
+        "System.Private.DataContractSerialization": "4.0.1"
       }
     }
   }

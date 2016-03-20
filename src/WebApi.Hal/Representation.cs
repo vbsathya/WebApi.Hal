@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using WebApi.Hal.Interfaces;
 using WebApi.Hal.JsonConverters;
 
+using System.Xml.Serialization;
+
 namespace WebApi.Hal
 {
     public abstract class Representation : IResource

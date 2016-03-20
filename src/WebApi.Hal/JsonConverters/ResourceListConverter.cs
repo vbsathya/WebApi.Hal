@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using WebApi.Hal.Interfaces;
+using System.Reflection;
 
 namespace WebApi.Hal.JsonConverters
 {
@@ -60,11 +61,21 @@ namespace WebApi.Hal.JsonConverters
 
         static bool IsResourceList(Type objectType)
         {
-            return typeof(IRepresentationList).IsAssignableFrom(objectType);
+            var type = typeof(IRepresentationList);
+#if DNX451
+            return type.IsAssignableFrom(objectType);
+#endif
+#if DNXCORE50
+            return type.GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+#endif
         }
 
         static bool IsResource(Type objectType)
         {
+            var type = typeof(Representation);
+#if DNX451
+            return type.IsAssignableFrom(objectType);
+#endif
             return typeof(Representation).IsAssignableFrom(objectType);
         }
     }

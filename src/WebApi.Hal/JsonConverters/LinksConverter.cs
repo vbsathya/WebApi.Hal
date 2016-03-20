@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Newtonsoft.Json;
+using System.Reflection;
 
 namespace WebApi.Hal.JsonConverters
 {
@@ -90,13 +90,17 @@ namespace WebApi.Hal.JsonConverters
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(IList<Link>).IsAssignableFrom(objectType);
+            var type = typeof(IList<Link>);
+#if DNX451
+            return type.IsAssignableFrom(objectType);
+#endif
+#if DNXCORE50
+            return type.GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+#endif
         }
 
         public virtual string ResolveUri(string href)
         {
-            if (!string.IsNullOrEmpty(href) && VirtualPathUtility.IsAppRelative(href))
-                return HttpContext.Current != null ? VirtualPathUtility.ToAbsolute(href) : href.Replace("~/", "/");
             return href;
         }
     }

@@ -1,11 +1,11 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using WebApi.Hal.Interfaces;
 
 namespace WebApi.Hal.JsonConverters
@@ -54,14 +54,14 @@ namespace WebApi.Hal.JsonConverters
 			if (!linksBackup.Any())
 				resource.Links = null; // avoid serialization
 
-			var saveContext = serializer.Context;
+			// var saveContext = serializer.Context;
 #if DNX451
             serializer.Context = GetResourceConverterContext();
 #endif
             serializer.Converters.Remove(this);
             serializer.Serialize(writer, resource);
             serializer.Converters.Add(this);
-            serializer.Context = saveContext;
+            // serializer.Context = saveContext;
 
 			if (!linksBackup.Any())
 				resource.Links = linksBackup;
