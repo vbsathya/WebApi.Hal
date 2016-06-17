@@ -1,4 +1,4 @@
-using Microsoft.AspNet.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
