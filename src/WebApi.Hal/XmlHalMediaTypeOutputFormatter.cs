@@ -38,7 +38,8 @@ namespace WebApi.Hal
 
             var response = context.HttpContext.Response;
             var contentType = context.ContentType;
-            var encoding = (contentType != null ? contentType.Encoding : null) ?? Encoding.UTF8;
+            //var encoding = (contentType != null ? contentType.Encoding : null) ?? Encoding.UTF8;
+            var encoding= Encoding.UTF8;
             using (var textWriter = context.WriterFactory(response.Body, encoding))
             {
                 WriteObject(textWriter, context.Object);
