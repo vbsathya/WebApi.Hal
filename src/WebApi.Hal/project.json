@@ -32,5 +32,8 @@
         }
       }
     }
+  },
+  "scripts": {
+    "postcompile": "dotnet pack --no-build"
   }
 }
