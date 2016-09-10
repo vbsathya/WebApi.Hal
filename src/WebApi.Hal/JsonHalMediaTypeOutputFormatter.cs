@@ -49,7 +49,10 @@ namespace WebApi.Hal
             SerializerSettings.Converters.Add(_embeddedResourceConverter);
             SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
         }
-
+        protected override JsonSerializer CreateJsonSerializer()
+        {
+            return JsonSerializer.Create(this.SerializerSettings);
+        }
         #endregion
     }
 }
