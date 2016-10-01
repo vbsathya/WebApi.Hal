@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using Microsoft.AspNet.Mvc.Internal;
 using WebApi.Hal.Tests.Representations;
 using Xunit;
+using System.Buffers;
 
 namespace WebApi.Hal.Tests
 {
@@ -25,7 +27,8 @@ namespace WebApi.Hal.Tests
         public void When_Formatting_A_Representation_With_HalPlusJson_Then_Json_Is_Returned()
         {
             // ARRANGE
-            var mediaFormatter = new JsonHalMediaTypeOutputFormatter();
+            var serializerSettings = SerializerSettingsProvider.CreateSerializerSettings();
+            var mediaFormatter = new JsonHalMediaTypeOutputFormatter (serializerSettings, ArrayPool<char>.Shared);
             using (var stream = new MemoryStream())
             {
                 using (var textWritter = new StreamWriter(stream))

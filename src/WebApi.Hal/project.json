@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-rc2-4",
+  "version": "1.0.0-rtm-1",
   "description": "WebApi.Hal",
   "authors": [ "Jake Ginnivan" ],
   "packOptions": {
@@ -10,9 +10,9 @@
   "copyright": "Copyright Jake Ginnivan 2013",
 
   "dependencies": {
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Primitives": "1.0.0-rc2-final",
-    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final"
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Microsoft.Extensions.Primitives": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0"
   },
 
   "tooling": {

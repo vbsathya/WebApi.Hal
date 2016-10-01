@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc.Internal;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.SwaggerGen;
+using System.Buffers;
 using WebApi.Hal.Web.Data;
 
 namespace WebApi.Hal.Web
@@ -45,7 +47,7 @@ namespace WebApi.Hal.Web
             services.AddMvc(options =>
             {
                 options.OutputFormatters.Add(new XmlHalMediaTypeOutputFormatter());
-                options.OutputFormatters.Add(new JsonHalMediaTypeOutputFormatter());
+                options.OutputFormatters.Add(new JsonHalMediaTypeOutputFormatter(SerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared));
             });
             services.AddEntityFramework()
                 .AddSqlServer()

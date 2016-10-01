@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using WebApi.Hal.JsonConverters;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using System.Buffers;
 
 namespace WebApi.Hal
 {
@@ -20,7 +21,7 @@ namespace WebApi.Hal
 
         #region Constructors
 
-        public JsonHalMediaTypeOutputFormatter(IHypermediaResolver hypermediaResolver)
+        public JsonHalMediaTypeOutputFormatter(JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, IHypermediaResolver hypermediaResolver):base(serializerSettings, charPool)
         {
             if (hypermediaResolver == null)
             {
@@ -31,7 +32,7 @@ namespace WebApi.Hal
             Initialize();
         }
 
-        public JsonHalMediaTypeOutputFormatter()
+        public JsonHalMediaTypeOutputFormatter(JsonSerializerSettings serializerSettings, ArrayPool<char> charPool) : base(serializerSettings, charPool)
         {
             Initialize();
         }
@@ -47,7 +48,7 @@ namespace WebApi.Hal
             SerializerSettings.Converters.Add(_resourceListConverter);
             SerializerSettings.Converters.Add(_resourceConverter);
             SerializerSettings.Converters.Add(_embeddedResourceConverter);
-            SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            SerializerSettings.NullValueHandling = NullValueHandling.Include;
         }
         protected override JsonSerializer CreateJsonSerializer()
         {

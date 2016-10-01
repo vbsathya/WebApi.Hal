@@ -3,6 +3,9 @@ using System;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using WebApi.Hal.JsonConverters;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.ObjectPool;
+using System.Buffers;
+
 namespace WebApi.Hal
 {
     public class JsonHalMediaTypeInputFormatter : JsonInputFormatter
@@ -17,7 +20,9 @@ namespace WebApi.Hal
 
         #region Constructors
 
-        public JsonHalMediaTypeInputFormatter(ILogger logger, IHypermediaResolver hypermediaResolver):base(logger)
+        //https://github.com/aspnet/Mvc/issues/4765
+
+        public JsonHalMediaTypeInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider, IHypermediaResolver hypermediaResolver):base(logger, serializerSettings, charPool, objectPoolProvider)
         {
             if (hypermediaResolver == null)
             {
@@ -28,7 +33,7 @@ namespace WebApi.Hal
             Initialize();
         }
 
-        public JsonHalMediaTypeInputFormatter(ILogger logger):base(logger)
+        public JsonHalMediaTypeInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider) : base(logger, serializerSettings, charPool, objectPoolProvider)
         {
             Initialize();
         }
@@ -44,7 +49,7 @@ namespace WebApi.Hal
             SerializerSettings.Converters.Add(_resourceListConverter);
             SerializerSettings.Converters.Add(_resourceConverter);
             SerializerSettings.Converters.Add(_embeddedResourceConverter);
-            SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            SerializerSettings.NullValueHandling = NullValueHandling.Include;
         }
 
         #endregion
