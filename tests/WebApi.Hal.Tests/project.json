@@ -15,7 +15,7 @@
     "ApprovalUtilities": "3.0.10",
     "xunit.runner.dnx": "2.1.0-rc1-build204",
     "Microsoft.AspNet.TestHost": "1.0.0-rc1-final",
-    "WebApi.Hal": "1.0.0-rtm-1",
+    "WebApi.Hal": "1.0.1-rtm-1",
     "Microsoft.AspNet.Mvc.Formatters.Json": "6.0.0-rc1-final"
   },
     "commands": {

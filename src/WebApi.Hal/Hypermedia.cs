@@ -88,14 +88,7 @@ namespace WebApi.Hal
         {
             if (_serviceProvider != null)
             {
-                try
-                {
-                    return _serviceProvider.GetRequiredService<IHypermediaAppender<T>>();
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
+                return _serviceProvider.GetService<IHypermediaAppender<T>>();
             }
             var type = resource.GetType();
 
