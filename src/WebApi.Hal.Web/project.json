@@ -31,7 +31,7 @@
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
     "Swashbuckle.SwaggerGen": "6.0.0-rc1-final",
     "Swashbuckle.SwaggerUi": "6.0.0-rc1-final",
-    "WebApi.Hal": "1.0.0-rtm-1",
+    "WebApi.Hal": "1.0.1-rtm-1",
     "EntityFramework.Core": "7.0.0-rc1-final"
   },
 
